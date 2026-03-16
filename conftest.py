@@ -21,7 +21,7 @@ def driver():
 
 # Screenshot on failure
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
-def pytest_runtest_makereport(item, _):
+def pytest_runtest_makereport(item, call):
 
     outcome = yield
     report = outcome.get_result()
