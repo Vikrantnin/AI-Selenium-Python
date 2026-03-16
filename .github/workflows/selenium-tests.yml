@@ -38,13 +38,13 @@ jobs:
 
     - name: Run Selenium Tests
       run: |
-        pytest -v --html=reports/test-report.html --self-contained-html
+        pytest -v --html=reports/report.html --self-contained-html
 
     - name: Upload Test Report
       uses: actions/upload-artifact@v4
       with:
         name: selenium-test-report
-        path: reports/test-report.html
+        path: reports/
 
     - name: Upload Failure Screenshots
       if: failure()
