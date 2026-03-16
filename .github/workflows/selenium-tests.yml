@@ -2,20 +2,21 @@ name: Python Selenium Tests
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 permissions:
   contents: read
 
 jobs:
-  build:
+  selenium-tests:
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout Repository
+      uses: actions/checkout@v4
 
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -25,12 +26,19 @@ jobs:
     - name: Install Chrome
       uses: browser-actions/setup-chrome@v1
 
-    - name: Install dependencies
+    - name: Install Python Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install selenium pytest webdriver-manager
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: Run Tests
+    - name: Run Selenium Tests
       run: |
         pytest -v
+
+    - name: Upload Failure Screenshots
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: selenium-screenshots
+        path: screenshots/
