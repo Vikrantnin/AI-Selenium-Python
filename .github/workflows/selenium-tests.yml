@@ -39,7 +39,7 @@ jobs:
     - name: Run Selenium Tests
       run: |
         mkdir -p reports
-        pytest -v --html=reports/report.html --self-contained-html
+        pytest -v -s --maxfail=1 --html=reports/report.html --self-contained-html
 
     - name: Upload Test Report
       if: always()
