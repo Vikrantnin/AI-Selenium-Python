@@ -1,10 +1,10 @@
 def generate_login_data():
 
     test_cases = [
-        ("valid_user@gmail.com", "valid@123"),   # Positive
-        ("invalid_user@gmail.com", "wrongpassword"), # Invalid credentials
+        ("valid_user@gmail.com", "validpass@321"),   # Positive
+        ("invalid_user@gmail.com", "wrongpass123"), # Invalid credentials
         ("", "password123"),                         # Blank username
-        ("user@gmail.com", "")                       # Blank password
+        ("username@gmail.com", "")                       # Blank password
     ]
 
     return test_cases
