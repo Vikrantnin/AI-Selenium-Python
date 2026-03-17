@@ -11,7 +11,6 @@ permissions:
 
 jobs:
   selenium-tests:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -26,20 +25,21 @@ jobs:
     - name: Install Chrome
       uses: browser-actions/setup-chrome@v1
 
+    - name: Install ChromeDriver
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y chromium-chromedriver
+
     - name: Install Python Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install selenium pytest webdriver-manager
+        pip install selenium pytest pytest-html webdriver-manager
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: Run Selenium Tests
-      run: |
-        pytest -v
-
-    - name: Run Selenium Tests
+    - name: Run Selenium Tests with Report
       run: |
         mkdir -p reports
-        pytest -v -s --maxfail=1 --html=reports/report.html --self-contained-html
+        pytest -v -s --maxfail=1 tests --html=reports/report.html --self-contained-html
 
     - name: Upload Test Report
       if: always()
