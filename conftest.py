@@ -7,7 +7,7 @@ import os
 @pytest.fixture
 def driver():
     options = Options()
-   # options.add_argument("--headless=new") #Run browser without GUI
+    options.add_argument("--headless=new") #Run browser without GUI
     options.add_argument("--no-sandbox") #Required for CI containers
     options.add_argument("--disable-dev-shm-usage") #Prevent memory crash
     options.add_argument("--window-size=1920,1080")
